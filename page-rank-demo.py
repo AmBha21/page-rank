@@ -11,12 +11,15 @@ def page_ranking(adjaceny_matrix, d=0.85, tolerance=1e-6):
     teleport = np.ones(N) / N
     v = d * np.dot(adjaceny_matrix, w) + (1 - d) * teleport
 
+    iterations = 0
     # iterating until convergence
     while np.linalg.norm(v - w) > tolerance:
         w = v
         # using the given pagerank formula
         v = d * np.dot(adjaceny_matrix, w) + (1 - d) * teleport
-    return v
+
+        iterations += 1
+    return v, iterations
 
 # example
 adjaceny_matrix = np.array([
@@ -26,6 +29,6 @@ adjaceny_matrix = np.array([
     [0, 0.5,   1,   0  ]
 ])
 
-v = page_ranking(adjaceny_matrix)
-print(v, sum(v))
+v, iterations = page_ranking(adjaceny_matrix)
+print(v, sum(v), iterations)
     
