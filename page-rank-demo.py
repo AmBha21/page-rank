@@ -1,6 +1,10 @@
 import numpy as np
 
 def page_ranking(stochastic_matrix, d=0.85, tolerance=1e-6):
+    # handle the dangling column (fourth column sums to 0)
+    # col_sums = stochastic_matrix.sum(axis=0)
+    # stochastic_matrix[:, col_sums == 0] = 1 / stochastic_matrix.shape[0]
+
     # getting the number of "websites"
     N = np.shape(stochastic_matrix)[0]
 
